@@ -13,7 +13,7 @@ spec:
         app: oes
     spec:
       containers:
-        - image: 'opsmx11/supplychain-ssd:2372r3-21'
+        - image: 'opsmx11/supplychain-ssd:mjuzts-22'
           name: supplychain-api
           ports:
             - containerPort: 8099
