@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supplychain-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oes
+  template:
+    metadata:
+      labels:
+        app: oes
+    spec:
+      containers:
+        - image: 'opsmx11/supplychain-ssd:2372r3-21'
+          name: supplychain-api
+          ports:
+            - containerPort: 8099
+          volumeMounts:
+            - mountPath: /app/app-config.yaml
+              name: supply-volume
+              subPath: app-config.yaml
+      imagePullSecrets:
+        - name: opsmx11-secret
+      volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+              - key: app-config.yaml
+                path: app-config.yaml
+            name: supply-volume
+          name: supply-volume
